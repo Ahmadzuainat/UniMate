@@ -1,7 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:unimate/views/auth/register_page.dart';
 import 'firebase_options.dart';
+import 'package:unimate/controllers/auth_controller.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,11 +21,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('UniMate - Firebase Connected!'),
-        ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthController()),
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+      home:RegisterPage()
       ),
     );
   }
